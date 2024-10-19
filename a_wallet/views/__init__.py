@@ -5,3 +5,4 @@ from .DeleteWalletView import DeleteWalletView
 from .WalletTransactionsView import WalletTransactionsView
 from .WalletDetailView import WalletDetailView
 from .DepositFundsView import DepositFundsView
+from .EditWalletView import EditWalletView

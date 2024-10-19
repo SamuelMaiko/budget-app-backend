@@ -8,6 +8,12 @@ class WalletSerializer(serializers.ModelSerializer):
         model=Wallet
         fields=['id', 'name', 'balance', 'color_theme','created_at','updated_at']
 
+    def __init__(self, *args, **kwargs):
+        super(WalletSerializer, self).__init__(*args, **kwargs)
+        # If it's an update (instance exists), make 'name' not required
+        if self.instance:
+            self.fields['name'].required = False
+
     def validate_balance(self, value):
         if value <= 0:
             raise serializers.ValidationError("Amount must be greater than zero.")

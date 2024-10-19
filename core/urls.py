@@ -11,12 +11,11 @@ urlpatterns = [
 # LATER 
 # deposit in wallet - done
 # expense items of a user - done,
-#  create an item,
-# adding item to week, removing item from week
-# add (provide price )and remove expense item from week
-# edit a week expense item
+#  create an item - done,
+# adding item to week - done
+# removing item from week - done
+# edit a week expense item - done
+# editting a wallet - done
 # handle the price changes e.g when add new item change the wallet price maybe
-# update wallet details
 
 # MUCH LATER
-# editting a wallet
