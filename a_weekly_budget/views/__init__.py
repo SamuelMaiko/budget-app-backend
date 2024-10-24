@@ -5,3 +5,4 @@ from .WeekDetailView import WeekDetailView
 from .AddItemView import AddItemView
 from .RemoveItemView import RemoveItemView
 from .EditWeekItemView import EditWeekItemView
+from .WithdrawWeekItemView import WithdrawWeekItemView

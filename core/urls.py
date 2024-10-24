@@ -16,6 +16,9 @@ urlpatterns = [
 # removing item from week - done
 # edit a week expense item - done
 # editting a wallet - done
-# handle the price changes e.g when add new item change the wallet price maybe
+# handle the price changes e.g when add new item change the wallet price maybe - done
 
+# remove items view debit change wallet - done
+# handle deletion money values - done
+# record the deposit of cash in the wallet transactions - done
 # MUCH LATER

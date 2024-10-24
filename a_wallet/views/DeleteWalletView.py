@@ -17,5 +17,8 @@ class DeleteWalletView(APIView):
         # checking if it belongs to the logged in user
         self.check_object_permissions(request,wallet)
 
+        if wallet.name =="Weekly wallet":
+            return Response({"error": "Not allowed to delete weekly wallet."}, status=status.HTTP_403_FORBIDDEN)
+
         wallet.delete()
         return Response({"success": "Wallet deleted successfully."}, status=status.HTTP_204_NO_CONTENT)

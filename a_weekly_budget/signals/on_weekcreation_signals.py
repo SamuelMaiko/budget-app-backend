@@ -1,6 +1,7 @@
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from a_weekly_budget.models import Week
+from a_wallet.models import Wallet
 
 @receiver(post_save, sender=Week)
 def name_the_week(sender, instance, created, **kwargs):

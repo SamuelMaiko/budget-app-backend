@@ -11,3 +11,4 @@ urlpatterns = [
     path('<int:wallet_id>/deposit-funds/', views.DepositFundsView.as_view(), name='deposit-funds'),
     path('<int:wallet_id>/transactions/', views.WalletTransactionsView.as_view(), name='wallet-transactions'),
 ]
+ 

@@ -14,6 +14,7 @@ class Week(BaseModel):
 
     class Meta:
         db_table = "weeks"
+        ordering =('created_at',)
 
     def __str__(self):
         return f"{self.user.username}'s Week: {self.name} ({self.start_date} - {self.end_date})"

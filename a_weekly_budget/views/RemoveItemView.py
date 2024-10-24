@@ -6,6 +6,8 @@ from a_weekly_budget.serializers import WeekSerializer
 from a_weekly_budget.models import Week, WeekItemAssociation
 from a_expense_items.models import ExpenseItem
 from a_weekly_budget.permissions import IsOwnerOfWeek
+from a_wallet.models import Transaction
+from django.db.models import F
 
 class RemoveItemView(APIView):
     permission_classes=[IsAuthenticated, IsOwnerOfWeek]
@@ -32,6 +34,17 @@ class RemoveItemView(APIView):
 
         association=WeekItemAssociation.objects.filter(expense_item=expense_item, week=week)
         if association.exists():
+            # transfer the remaining money to wallet 
+            remaining_money=association.remaining_amount
+            wallet=Wallet.objects.filter(
+            name="Weekly wallet", 
+            user=association.week.user
+            ).update(
+                balance=F('balance')+remaining_money
+                )
+            
+            Transaction.objects.create(wallet=wallet, amount=remaining_money, description=f"item ({expense_item.name}) removed from week ({week.name}). remaining money -> ({remaining_money})")
+            
             association.delete()
             return Response({"success": "Item removed successfully."}, status=status.HTTP_204_NO_CONTENT)
         return Response({"detail": "Item not found in week."}, status=status.HTTP_404_NOT_FOUND)
