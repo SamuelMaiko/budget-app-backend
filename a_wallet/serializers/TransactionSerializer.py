@@ -6,7 +6,7 @@ class TransactionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Transaction
-        fields = ['id', 'type', 'amount', 'description', 'wallet', 'other_wallet']
+        fields = ['id', 'type', 'amount', 'description', 'wallet', 'other_wallet','created_at', 'updated_at']
         extra_kwargs ={
             'description':{'required':False}
         }

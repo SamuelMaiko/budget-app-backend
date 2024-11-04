@@ -6,7 +6,7 @@ from a_weekly_budget.serializers import WeekSerializer
 from a_weekly_budget.models import Week, WeekItemAssociation
 from a_expense_items.models import ExpenseItem
 from a_weekly_budget.permissions import IsOwnerOfWeek
-from a_wallet.models import Transaction
+from a_wallet.models import Transaction, Wallet
 from django.db.models import F
 
 class RemoveItemView(APIView):
@@ -32,8 +32,9 @@ class RemoveItemView(APIView):
         # I know the permission is for the week but it can work also for items
         self.check_object_permissions(request, expense_item)
 
-        association=WeekItemAssociation.objects.filter(expense_item=expense_item, week=week)
-        if association.exists():
+        association_set=WeekItemAssociation.objects.filter(expense_item=expense_item, week=week)
+        if association_set.exists():
+            association=association_set.first()
             # transfer the remaining money to wallet 
             remaining_money=association.remaining_amount
             wallet=Wallet.objects.filter(
@@ -42,8 +43,13 @@ class RemoveItemView(APIView):
             ).update(
                 balance=F('balance')+remaining_money
                 )
-            
-            Transaction.objects.create(wallet=wallet, amount=remaining_money, description=f"item ({expense_item.name}) removed from week ({week.name}). remaining money -> ({remaining_money})")
+            print(wallet)
+            Transaction.objects.create(
+                type="credit",
+                amount=remaining_money,
+                wallet_id=wallet,
+                description=f"item ({expense_item.name}) removed from week ({week.name}). remaining money -> ({remaining_money})"
+                )
             
             association.delete()
             return Response({"success": "Item removed successfully."}, status=status.HTTP_204_NO_CONTENT)

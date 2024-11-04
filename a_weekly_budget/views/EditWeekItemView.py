@@ -30,8 +30,7 @@ class EditWeekItemView(APIView):
                 weekly_wallet.update(
                     balance=F('balance')+week_item_association.amount_allocated-inc_amount_allocated
                     ) 
-
-
+                
         serializer=MyCustomItemSerializer(week_item_association, data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user)

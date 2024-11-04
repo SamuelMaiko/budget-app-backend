@@ -4,7 +4,7 @@ from django.conf import settings
 from a_expense_items.models import ExpenseItem
 
 class Week(BaseModel):
-    name = models.CharField(max_length=255, default="", blank=True, null=True, unique=True)
+    name = models.CharField(max_length=255, default="", blank=True, null=True)
     start_date = models.DateField()
     end_date = models.DateField()
     total_expenses = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
@@ -14,7 +14,7 @@ class Week(BaseModel):
 
     class Meta:
         db_table = "weeks"
-        ordering =('created_at',)
+        ordering =('-created_at',)
 
     def __str__(self):
         return f"{self.user.username}'s Week: {self.name} ({self.start_date} - {self.end_date})"

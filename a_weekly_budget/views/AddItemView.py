@@ -12,9 +12,12 @@ class AddItemView(APIView):
 
     def post(self, request, week_id):
         inc_item_id=request.data.get('item_id')
+        inc_amount=request.data.get('amount')
 
         if not inc_item_id:
             return Response({"error": "item_id is required."}, status=status.HTTP_400_BAD_REQUEST)
+        elif not inc_amount:
+            return Response({"error": "amount is required."}, status=status.HTTP_400_BAD_REQUEST)
         
         try:
             week = Week.objects.get(id=week_id)
@@ -33,7 +36,7 @@ class AddItemView(APIView):
         if week.expense_items.filter(id=inc_item_id).exists():
             return Response({"error": "Expense item already added to this week."}, status=status.HTTP_400_BAD_REQUEST)
 
-        association=WeekItemAssociation.objects.create(expense_item=expense_item, week=week)
+        association=WeekItemAssociation.objects.create(expense_item=expense_item, week=week, amount_allocated=inc_amount)
         # week.expense_items.add(expense_item)
 
         return Response({"id":association.id,"success":"Expense item added successfully."}, status=status.HTTP_200_OK)

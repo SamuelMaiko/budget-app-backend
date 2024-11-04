@@ -11,6 +11,7 @@ class WeekItemAssociation(BaseModel):
 
     class Meta:
         db_table = "week_item_association"
+        ordering=('-created_at',)
 
     def __str__(self):
         return f"{self.week.user.username}'s association btn:  {self.week.name} - {self.expense_item.name}"
