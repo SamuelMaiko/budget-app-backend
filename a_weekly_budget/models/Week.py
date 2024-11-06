@@ -19,6 +19,7 @@ class Week(BaseModel):
     def __str__(self):
         return f"{self.user.username}'s Week: {self.name} ({self.start_date} - {self.end_date})"
 
+    # unspent cash but remember it is allocated
     @property
     def remaining_cash(self):
         return self.total_expenses - self.used_cash

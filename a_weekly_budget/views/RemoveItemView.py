@@ -37,6 +37,15 @@ class RemoveItemView(APIView):
             association=association_set.first()
             # transfer the remaining money to wallet 
             remaining_money=association.remaining_amount
+            association.week.total_expenses-=association.amount_allocated
+            association.week.used_cash-=association.amount_used
+            association.week.save()
+
+            item=ExpenseItem.objects.get(name="Other", user=request.user)
+            associationTwo=WeekItemAssociation.objects.get(expense_item=item, week=association.week)
+            associationTwo.amount_allocated+=association.remaining_amount
+            associationTwo.save()
+
             wallet=Wallet.objects.filter(
             name="Weekly wallet", 
             user=association.week.user

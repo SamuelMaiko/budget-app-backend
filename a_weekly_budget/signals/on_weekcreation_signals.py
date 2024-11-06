@@ -11,8 +11,16 @@ def name_the_week(sender, instance, created, **kwargs):
         instance.name = f"Week {new_week_position}"
         instance.save()
 
-        # adding "Other" item to all weeks
+        # adding "Other" item to a week after creation
         item=ExpenseItem.objects.get(name="Other", user=instance.user)
-        WeekItemAssociation.objects.create(expense_item=item, week=instance)
+        wallet=Wallet.objects.get(name="Weekly wallet", user=instance.user)
+        WeekItemAssociation.objects.create(expense_item=item, week=instance, amount_allocated=wallet.balance)
+
+    # item=ExpenseItem.objects.get(name="Other", user=instance.user)
+    # association=WeekItemAssociation.objects.get(expense_item=item, week=instance)
+    # wallet=Wallet.objects.get(name="Weekly wallet", user=instance.user)
+    # association.amount_allocated=(wallet.balance+instance.used_cash) - instance.total_expenses
+    # association.save()
+
 
         
