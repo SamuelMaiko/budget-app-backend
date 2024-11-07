@@ -6,4 +6,4 @@ class AWeeklyBudgetConfig(AppConfig):
     name = 'a_weekly_budget'
 
     def ready(self):
-        from .signals import on_weekcreation_signals
+        from .signals import on_weekcreation_signals, on_statementcreation_signals, on_weekitemsave_signals

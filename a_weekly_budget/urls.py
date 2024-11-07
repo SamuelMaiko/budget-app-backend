@@ -9,4 +9,6 @@ urlpatterns = [
     path('<int:week_id>/add-item/', views.AddItemView.as_view(), name='add-expense-item'),
     path('<int:week_id>/remove-item/', views.RemoveItemView.as_view(), name='remove-expense-item'),
     path('edit-week-item/<int:week_item_id>/', views.EditWeekItemView.as_view(), name='edit-week-item'),
+    path('week-item/<int:week_item_id>/withdraw/', views.WithdrawWeekItemView.as_view(), name='withdraw-week-item'),
+    path('<int:week_id>/statements/', views.WeekStatementsView.as_view(), name='week-statements'),
 ]

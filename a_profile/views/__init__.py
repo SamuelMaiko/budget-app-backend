@@ -1,0 +1,1 @@
+from .MyProfileView import MyProfileView

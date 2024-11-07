@@ -4,13 +4,13 @@ from a_weekly_budget.models import WeekItemAssociation
 
 
 class ExpenseItemSerializer(serializers.ModelSerializer):
-    in_work=serializers.SerializerMethodField()
+    in_week=serializers.SerializerMethodField()
 
     class Meta:
         model = ExpenseItem
-        fields = ['id', 'name','in_work']
+        fields = ['id', 'name','in_week']
 
-    def get_in_work(self, obj):
+    def get_in_week(self, obj):
         week=self.context.get('week', None)
         if week is not None:
             return WeekItemAssociation.objects.filter(week=week, expense_item=obj).exists()

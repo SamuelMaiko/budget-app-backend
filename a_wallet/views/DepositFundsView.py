@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from a_wallet.models import Wallet
 from a_wallet.permissions import IsOwnerOfWallet
+from a_wallet.models import Transaction
 
 class DepositFundsView(APIView):
     permission_classes=[IsAuthenticated, IsOwnerOfWallet]
@@ -24,5 +25,13 @@ class DepositFundsView(APIView):
 
         wallet.balance+=inc_amount
         wallet.save()
+
+        # creating a transaction for the wallet 
+        Transaction.objects.create(
+            type='deposit',
+            amount=inc_amount,
+            wallet=wallet,
+        )
+
             
-        return Response({"success": "Deposit successful."}, status=status.HTTP_200_OK)
+        return Response({"success": "Deposit successful.","new_amount":wallet.balance}, status=status.HTTP_200_OK)

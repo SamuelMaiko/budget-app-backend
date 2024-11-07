@@ -6,14 +6,15 @@ class TransactionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Transaction
-        fields = ['id', 'type', 'amount', 'description', 'wallet', 'other_wallet']
+        fields = ['id', 'type', 'amount', 'description', 'wallet', 'other_wallet','created_at', 'updated_at']
         extra_kwargs ={
             'description':{'required':False}
         }
 
     def get_type(self, obj):
         wallet = self.context.get("wallet")
-        return "Credit" if obj.other_wallet == wallet else "Debit"
+        return "Credit" if obj.other_wallet == wallet else "Deposit" if obj.type == "deposit" else "Debit"
+
 
     def validate_amount(self, value):
         if value <= 0:
