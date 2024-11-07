@@ -15,7 +15,7 @@ def create_profile(sender, instance, created, **kwargs):
         ExpenseItem.objects.create(name="Other", user=instance)
         Week.objects.create(
             name="gjhg",
-            user=instance.user,
+            user=instance,
             start_date=datetime.today(),
             end_date=datetime.today() + timedelta(days=7)
         )
