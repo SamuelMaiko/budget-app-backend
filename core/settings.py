@@ -17,8 +17,8 @@ SECRET_KEY = 'django-insecure-av5x8b5d2$&8tjbj+$_nvlbm6m=$un@y2h#g+d!$p*=@!dq#(o
 
 DEBUG =  env('DEBUG')
 
-ALLOWED_HOSTS = []
-# ALLOWED_HOSTS = ["budgettyapp.pythonanywhere.com"]
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["budgettyapp.pythonanywhere.com"]
 
 # Application definition
 
