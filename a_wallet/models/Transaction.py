@@ -20,4 +20,4 @@ class Transaction(BaseModel):
         ordering = ('-created_at',)
 
     def __str__(self):
-        return f"{self.get_type_display()} of {self.amount} involving {self.wallet.user.username}'s {self.wallet.name}  {f'and {self.other_wallet.user.username}'+"\'s" if self.other_wallet else "" } {self.other_wallet.name if self.other_wallet else " only"}"
+        return f"{self.get_type_display()} of {self.amount} involving {self.wallet.user.username}'s {self.wallet.name}  {f'and {self.other_wallet.user.username}'+" s" if self.other_wallet else "" } {self.other_wallet.name if self.other_wallet else " only"}"
