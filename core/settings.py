@@ -52,6 +52,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "https://budgetty-webapp.netlify.app",
     # "http://127.0.0.1:9000",
 ]
 
