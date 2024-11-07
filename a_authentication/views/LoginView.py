@@ -30,7 +30,7 @@ class LoginView(APIView):
             refresh = RefreshToken.for_user(user)
 
             response_dict={
-                "user":dict(username=user.username, email=user.email),
+                # "user":dict(username=user.username, email=user.email),
                 'refresh': str(refresh),
                 'access': str(refresh.access_token),
                 }
