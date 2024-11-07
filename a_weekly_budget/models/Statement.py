@@ -14,4 +14,4 @@ class Statement(BaseModel):
         ordering=('-created_at',)
 
     def __str__(self):
-        return f"{self.week.user.username}'s Statement:  {self.amount} - {self.description[:30] if self.description else ""}"
+        return f"{self.week.user.username} s Statement:  {self.amount} - {self.description[:30] if self.description else ''}"
