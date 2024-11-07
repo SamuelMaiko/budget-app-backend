@@ -18,7 +18,7 @@ SECRET_KEY = 'django-insecure-av5x8b5d2$&8tjbj+$_nvlbm6m=$un@y2h#g+d!$p*=@!dq#(o
 DEBUG =  env('DEBUG')
 
 # ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ["budgettyapp.pythonanywhere.com"]
+ALLOWED_HOSTS = ["budgettyapp.pythonanywhere.com","192.168.100.9"]
 
 # Application definition
 
@@ -53,7 +53,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "https://budgetty-webapp.netlify.app",
-    # "http://127.0.0.1:9000",
+    "http://192.168.100.9:5173",
 ]
 
 ROOT_URLCONF = 'core.urls'
