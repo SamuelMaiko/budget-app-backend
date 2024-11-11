@@ -27,9 +27,9 @@ class EditWeekItemView(APIView):
                 if weekly_wallet.first().balance+week_item_association.amount_allocated-inc_amount_allocated<=0:
                      return Response({"error": "Not enough balance in the wallet."}, status=status.HTTP_400_BAD_REQUEST)
                 # update the amounts
-                # weekly_wallet.update(
-                #     balance=F('balance')+week_item_association.amount_allocated-inc_amount_allocated
-                #     ) 
+                weekly_wallet.update(
+                    balance=F('balance')+week_item_association.amount_allocated-inc_amount_allocated
+                    ) 
                 
         serializer=MyCustomItemSerializer(week_item_association, data=request.data)
         if serializer.is_valid():

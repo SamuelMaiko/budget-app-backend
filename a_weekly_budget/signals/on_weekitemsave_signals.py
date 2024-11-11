@@ -16,7 +16,7 @@ def change_the_week_expenses_and_used_cash(sender, instance,**kwargs):
         total_allocated=Sum('amount_allocated'),
         total_used=Sum('amount_used')
         )
-        print(f"allocated {totals['total_allocated']}")
+        # print(f"allocated {totals['total_allocated']}")
         instance.week.total_expenses=totals['total_allocated']+association.amount_used
         instance.week.used_cash=totals['total_used']+association.amount_used
         instance.week.save(update_fields=['total_expenses', 'used_cash'])
@@ -25,8 +25,8 @@ def change_the_week_expenses_and_used_cash(sender, instance,**kwargs):
         wallet=Wallet.objects.get(name="Weekly wallet", user=instance.week.user)
         # print() 
         # association.amount_allocated=wallet.balance + instance.week.used_cash - totals['total_allocated']-instance.week.used_cash
-        association.amount_allocated=wallet.balance - totals['total_allocated'] + association.amount_used
-        print("saved")
+        association.amount_allocated=wallet.balance + totals["total_used"] - totals['total_allocated']
+        # print("saved")
         association.save()
     else:
         print("found nothing 😂")
